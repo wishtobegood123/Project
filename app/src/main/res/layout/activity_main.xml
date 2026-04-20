@@ -1,17 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#0b132b">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    
+    <LinearLayout
+        android:id="@+id/llBottomButtons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#16213e"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="4">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
+        <Button android:id="@+id/btnSave" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Save" />
+        <Button android:id="@+id/btnLoad" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Load" />
+        <Button android:id="@+id/btnNextPhase" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Next Phase" />
+        <Button android:id="@+id/btnStatistics" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Stats" />
+    </LinearLayout>
+
+    
+    <Button
+        android:id="@+id/btnTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#1976D2"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:elevation="6dp"
+        android:text="📖 Guide"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
+
+    
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/llBottomButtons">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvPhase"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvResources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#D9E2EC"
+                android:textSize="16sp" />
+
+            <ViewFlipper
+                android:id="@+id/viewFlipper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_scheduling_phase">
+
+                    
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="📋 Standby Crew (select one, then assign)" android:textColor="#4FC3F7" android:textStyle="bold" android:textSize="16sp" />
+                    <Button android:id="@+id/btnRecruitCrew" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="👥 Recruit New Crew (Cost: 100 resources)" android:layout_marginBottom="8dp" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvUnassigned" android:layout_width="match_parent" android:layout_height="160dp" android:layout_marginBottom="12dp" />
+
+                    
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="🎯 Assign Destination (choose 1 of 3)" android:textColor="#FFD54F" android:textStyle="bold" android:textSize="16sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:layout_marginBottom="12dp">
+
+                        <Button android:id="@+id/btnAssignQuarters" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🏠 Quarters\n(Recover HP/Energy)" android:textSize="12sp" />
+                        <Button android:id="@+id/btnAssignSimulator" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="💻 Training\n(Gain XP)" android:textSize="12sp" />
+                        <Button android:id="@+id/btnAssignMission" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="⚔️ Mission Dept\n(Prepare for Combat)" android:textSize="12sp" />
+                    </LinearLayout>
+
+                    
+                    <LinearLayout
+                        android:id="@+id/llCrewDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/card_background"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:visibility="gone">
+
+                        <TextView android:id="@+id/tvDetailName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvDetailProfession" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textColor="#CFD8DC" />
+                        <TextView android:id="@+id/tvDetailDesc" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:textColor="#E0FBFC" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="HP" android:textColor="#FFFFFF" />
+                        <ProgressBar android:id="@+id/pbDetailHp" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="10dp" android:max="100" android:progressDrawable="@drawable/hp_progress" />
+                        <TextView android:id="@+id/tvDetailHpText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Shield" android:textColor="#FFFFFF" />
+                        <ProgressBar android:id="@+id/pbDetailShield" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="10dp" android:max="100" android:progressDrawable="@drawable/shield_progress" />
+                        <TextView android:id="@+id/tvDetailShieldText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" />
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Energy" android:textColor="#FFFFFF" />
+                        <ProgressBar android:id="@+id/pbDetailEnergy" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="10dp" android:max="100" android:progressDrawable="@drawable/energy_progress" />
+                        <TextView android:id="@+id/tvDetailEnergyText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFFFFF" />
+                    </LinearLayout>
+
+                    
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="🏠 Quarters (Recover HP/Energy)" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvQuarters" android:layout_width="match_parent" android:layout_height="120dp" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="💻 Training Simulator (Gain XP)" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvSimulator" android:layout_width="match_parent" android:layout_height="120dp" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="⚔️ Mission Control (Prepare for Combat)" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvMissionControl" android:layout_width="match_parent" android:layout_height="120dp" />
+                </LinearLayout>
+
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Mission List" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvMissions" android:layout_width="match_parent" android:layout_height="240dp" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Available Crew" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvAvailableCrew" android:layout_width="match_parent" android:layout_height="180dp" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Current Squad" android:textColor="#FFFFFF" android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvSquad" android:layout_width="match_parent" android:layout_height="180dp" />
+                    <TextView android:id="@+id/tvSquadBonus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:background="@drawable/card_background" android:padding="12dp" android:textColor="#FFFFFF" />
+                    <TextView android:id="@+id/tvMissionWarning" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:background="@drawable/card_background" android:padding="12dp" android:textColor="#FF5252" android:visibility="gone" />
+                    
+                    <Button android:id="@+id/btnStartMission" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="🚀 Start Mission" android:textSize="16sp" android:backgroundTint="#4CAF50" />
+                </LinearLayout>
+
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <com.example.spacecolonypioneers.ui.view.CombatView
+                        android:id="@+id/combatView"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.4" />
+                    <LinearLayout
+                        android:id="@+id/llCombatControls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+                        <Button android:id="@+id/btnAttack" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Attack" android:textSize="16sp" />
+                        <Button android:id="@+id/btnSkill" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Skill" android:textSize="16sp" />
+                        <Button android:id="@+id/btnEndTurn" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="End Turn" android:textSize="16sp" />
+                    </LinearLayout>
+                    <Button android:id="@+id/btnExitCombat" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Exit Combat" android:visibility="gone" android:textSize="16sp" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvCombatLog" android:layout_width="match_parent" android:layout_height="0dp" android:layout_marginTop="4dp" android:layout_weight="0.3" />
+                </LinearLayout>
+            </ViewFlipper>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

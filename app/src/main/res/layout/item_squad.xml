@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView android:id="@+id/tvSquadName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvSquadProfession" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#CFD8DC" />
+    <TextView android:id="@+id/tvSquadHp" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF" />
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView android:id="@+id/tvCrewName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvCrewProfession" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#CFD8DC" />
+    <TextView android:id="@+id/tvCombatCooldown" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#FF9800" android:textSize="12sp" android:visibility="gone" />
+    <ProgressBar android:id="@+id/pbCrewHp" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="10dp" android:layout_marginTop="6dp" android:progressDrawable="@drawable/hp_progress" />
+</LinearLayout>
