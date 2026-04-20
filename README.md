@@ -1,239 +1,252 @@
-# Space Colony: Pioneers - Android 项目
+# Space Colony: Pioneers
 
-这是一个原生 Android 策略模拟游戏，使用 Java 和 API 28 开发。
+A strategic space colony management game where you command a crew, manage resources, and survive alien threats. Build your team, complete missions, and reach 100 fragments to win!
 
-## 项目要求
+## 🎮 Game Overview
 
-- **Android Studio**: Arctic Fox (2020.3.1) 或更高版本
-- **JDK**: Java 8 或更高版本（推荐 JDK 11）
-- **Gradle**: 7.5（项目已配置）
-- **Android SDK**: API 28 (Android 9.0)
-- **最低支持**: Android 5.0 (API 21)
+You are the commander of a space colony. Your mission is to keep the colony growing, improve your crew's power through missions and training, and collect resources to achieve victory.
 
-## 在 Android Studio 中打开项目
+### Victory Condition
+- **Collect 100 fragments** to win the game!
 
-### 方法一：直接打开（推荐）
+## ✨ Features
 
-1. 启动 Android Studio
-2. 点击 "Open" 或 "File" -> "Open"
-3. 选择项目文件夹：`c:\Users\Wishtobegood\AndroidStudioProjects\MyApplication5`
-4. 等待 Gradle 同步完成（首次可能需要下载依赖，请耐心等待）
+- **5 Unique Professions**: Medic, Engineer, Soldier, Scout, and Commander
+- **Strategic Combat**: Turn-based battles with skills, shields, and energy management
+- **Crew Management**: Assign crew to different areas for various benefits
+- **Mission System**: Choose missions, build squads, and face challenging enemies
+- **Progression System**: Level up crew, gain XP, and unlock powerful abilities
+- **Save/Load System**: Save your progress and continue anytime
+- **Dynamic Difficulty**: Enemy AI adapts with buffs, debuffs, and varied strategies
 
-### 方法二：从欢迎界面导入
+## 🏠 Core Gameplay Loop
 
-1. 启动 Android Studio
-2. 在欢迎界面选择 "Import Project"
-3. 选择项目的根目录
-4. 等待 Gradle 构建完成
+### 1. Scheduling Phase
+Assign your crew to three key areas:
+- **Quarters**: Crew recovers full energy. Medic boosts recovery for all crew here
+- **Training Simulator**: Crew gains XP and levels up faster
+- **Mission Control**: Prepares crew for combat missions
 
-## 首次运行前的准备
+### 2. Progression Phase
+Process daily effects:
+- Crew in quarters recover HP and energy
+- Crew in simulator gain experience points
+- Mission control crew prepare for upcoming missions
 
-### 1. 确保已安装 Android SDK Platform 28
+### 3. Mission Selection Phase
+- Choose from available missions
+- Build your squad (up to 5 members)
+- Check difficulty warnings and squad bonuses
+- Start the mission when ready
 
-打开 Android Studio：
-- 点击 "Tools" -> "SDK Manager"
-- 在 "SDK Platforms" 标签页中，勾选 "Android 9.0 (Pie)" - API Level 28
-- 点击 "Apply" 安装（如果尚未安装）
+### 4. Combat Phase
+Turn-based tactical combat:
+- Select crew members to attack or use skills
+- Monitor enemy intents before they act
+- Manage shields, energy, and health
+- Defeat all enemies to complete the mission
 
-### 2. 确保已安装 Build Tools
+## 👥 Crew Professions
 
-在 SDK Manager 中：
-- 切换到 "SDK Tools" 标签页
-- 确保已安装 "Android SDK Build-Tools 29.0.3"
-- 如果没有，勾选并安装
+### Medic
+- **Role**: Healing specialist
+- **Special**: Boosts recovery for all crew in quarters
+- **Skill**: Heal - Restore HP to teammates
+- **Stats**: High energy, moderate HP
 
-### 3. 配置 JDK
+### Engineer
+- **Role**: Defense and protection
+- **Skill**: Repair - Generate energy shields
+- **Stats**: Strong defense, good HP
 
-- 点击 "File" -> "Project Structure" -> "SDK Location"
-- 确保 "JDK location" 指向有效的 JDK 路径
-- 推荐使用 Android Studio 自带的 JDK
+### Soldier
+- **Role**: Frontline damage dealer
+- **Skill**: Rage Shot - Powerful single-target attack
+- **Stats**: Highest attack power
 
-## 运行项目
+### Scout
+- **Role**: Reconnaissance and weakening enemies
+- **Skill**: Scout - Debuff enemies
+- **Stats**: Agile, high energy
 
-### 在模拟器上运行
+### Commander
+- **Role**: Team leader and buffer
+- **Skill**: Inspire - Boost squad morale and combat power
+- **Stats**: Balanced stats, team support
 
-1. 创建虚拟设备：
-   - 点击 "Tools" -> "Device Manager"
-   - 点击 "Create Device"
-   - 选择一个设备（如 Pixel 4）
-   - 选择系统镜像：API 28 (Android 9.0)
-   - 完成创建
+## 🎯 Installation Guide
 
-2. 运行应用：
-   - 点击工具栏的绿色运行按钮（▶）
-   - 或按 `Shift + F10`
-   - 选择刚创建的模拟器
+### Prerequisites
+- **Android Studio**: Arctic Fox (2020.3.1) or later
+- **JDK**: Java Development Kit 11 or higher
+- **Android SDK**: API level 21 (Android 5.0) or higher
+- **Gradle**: Version 8.7 or compatible
 
-### 在真机上运行
+### Step-by-Step Installation
 
-1. 启用开发者选项：
-   - 进入手机设置 -> 关于手机
-   - 连续点击 "版本号" 7 次
-
-2. 启用 USB 调试：
-   - 进入设置 -> 开发者选项
-   - 开启 "USB 调试"
-
-3. 连接手机：
-   - 使用 USB 线连接手机到电脑
-   - 在手机上授权 USB 调试
-
-4. 运行应用：
-   - 点击运行按钮
-   - 选择你的设备
-
-## 项目结构
-
-```
-app/src/main/java/com/example/spacecolonypioneers/
-├── manager/          # 游戏管理器
-│   ├── CombatManager.java       # 战斗管理
-│   ├── CrewManager.java         # 船员管理
-│   ├── MissionManager.java      # 任务管理
-│   ├── ProgressionManager.java  # 进度管理
-│   └── StorageManager.java      # 存档管理
-├── model/            # 数据模型
-│   ├── enums/        # 枚举类型
-│   ├── CrewMember.java          # 船员
-│   ├── Enemy.java               # 敌人
-│   ├── GameState.java           # 游戏状态
-│   └── ...
-├── ui/               # 用户界面
-│   ├── adapter/      # RecyclerView 适配器
-│   ├── view/         # 自定义视图
-│   ├── MainActivity.java        # 主活动
-│   └── StatisticsActivity.java  # 统计活动
-└── util/             # 工具类
-    └── GsonProvider.java        # JSON 序列化
+#### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd MyApplication5
 ```
 
-## 游戏功能
+#### 2. Open in Android Studio
+- Launch Android Studio
+- Select "Open an Existing Project"
+- Navigate to the project directory and select it
+- Wait for Gradle sync to complete
 
-### 核心玩法循环
+#### 3. Configure Build Settings
+The project uses the following configuration:
+- **Minimum SDK**: API 21 (Android 5.0)
+- **Target SDK**: Latest stable version
+- **Build Tools**: Configured in `build.gradle`
 
-1. **人员调度 (Scheduling)**
-   - 将船员分配到宿舍、训练模拟器或任务指挥部
-   - 查看船员详细信息
+#### 4. Sync Gradle
+- Android Studio should automatically sync Gradle
+- If not, go to **File > Sync Project with Gradle Files**
+- Ensure all dependencies download successfully
 
-2. **进度处理 (Progression)**
-   - 宿舍恢复 HP
-   - 训练模拟器获得 XP
-   - 提升等级和能力
+#### 5. Build the Project
+- Go to **Build > Make Project** (or press `Ctrl+F9`)
+- Check for any build errors in the Build window
+- Fix any issues if they appear
 
-3. **任务选择 (Mission Selection)**
-   - 浏览随机生成的任务
-   - 组建小队（最多 5 人）
-   - 查看小队加成
+#### 6. Run on Device/Emulator
 
-4. **战斗 (Combat)**
-   - 回合制战斗系统
-   - 基础攻击和技能释放
-   - 护盾和伤害计算
+**Option A: Physical Device**
+1. Enable Developer Options on your Android device
+2. Enable USB Debugging
+3. Connect device via USB
+4. Click **Run** button in Android Studio
+5. Select your device from the list
 
-### 五个职业
+**Option B: Emulator**
+1. Open **AVD Manager** (Tools > AVD Manager)
+2. Create a new virtual device (API 21+)
+3. Start the emulator
+4. Click **Run** button in Android Studio
+5. Select the emulator
 
-- **医疗兵 (Medic)**: 治疗队友，持久战专家
-- **工程师 (Engineer)**: 生成护盾，防御出色
-- **士兵 (Soldier)**: 高攻击力，前线战斗
-- **侦察兵 (Scout)**: 敏捷行动，削弱敌人
-- **指挥官 (Commander)**: 团队核心，鼓舞士气
+## 🔧 Troubleshooting
 
-### 特色功能
+### Common Issues
 
-✅ 完整的存档/读档系统  
-✅ 详细的统计数据可视化  
-✅ 小队加成系统  
-✅ 随机任务生成  
-✅ 受伤机制（无永久死亡）  
-✅ 技能系统  
-✅ 等级成长系统  
+**Gradle Sync Failed**
+- Check your internet connection
+- Go to **File > Invalidate Caches / Restart**
+- Update Android Studio to the latest version
 
-## 常见问题
+**Build Errors**
+- Clean the project: **Build > Clean Project**
+- Rebuild: **Build > Rebuild Project**
+- Check that JDK path is correctly configured
 
-### Gradle 同步失败
+**App Crashes on Launch**
+- Check Logcat for error messages
+- Ensure minimum SDK requirements are met
+- Verify all dependencies are properly installed
 
-**问题**: Gradle sync failed 或依赖下载失败
+**Performance Issues**
+- Close other applications
+- Increase emulator RAM allocation
+- Use a physical device for better performance
 
-**解决方案**:
-1. 检查网络连接
-2. 点击 "File" -> "Invalidate Caches / Restart"
-3. 删除 `.gradle` 文件夹后重新同步
-4. 确保使用了正确的 Gradle 版本（7.5）
+## 📱 Controls
 
-### SDK 未找到
+### Main Interface
+- **Tap crew members** to select and view details
+- **Assign buttons** to send crew to different areas
+- **Next Phase** to advance to the next game phase
+- **Save/Load** to manage game progress
+- **Stats** to view detailed statistics
+- **Guide** to access this tutorial
 
-**问题**: SDK location not found
+### Combat Interface
+- **Select crew** by tapping their icon
+- **Attack** - Basic attack against selected enemy
+- **Skill** - Use special ability (consumes energy)
+- **End Turn** - Finish your turn and let enemies act
+- **Exit Combat** - Leave battle (win or retreat)
 
-**解决方案**:
-1. 在 `local.properties` 文件中添加：
-   ```
-   sdk.dir=C\:\\Users\\YourUsername\\AppData\\Local\\Android\\Sdk
-   ```
-2. 或在 Android Studio 中配置 SDK 路径
+## 💡 Tips & Strategies
 
-### 编译错误
+### Early Game
+- Start with balanced squad composition
+- Focus on completing easier missions first
+- Keep at least one Medic for healing
 
-**问题**: 出现编译错误或找不到类
+### Mid Game
+- Place Medic in Quarters to boost team recovery
+- Use Training Simulator to level up key crew
+- Build diverse squads for different mission types
 
-**解决方案**:
-1. 点击 "Build" -> "Clean Project"
-2. 然后点击 "Build" -> "Rebuild Project"
-3. 确保所有依赖都已正确下载
+### Late Game
+- Maximize fragment collection efficiency
+- Upgrade crew to handle high-difficulty missions
+- Maintain resource balance for recruitment
 
-### 模拟器无法启动
+### Combat Tips
+- Always check enemy intent before acting
+- Prioritize healing injured crew members
+- Use skills strategically to conserve energy
+- Focus fire on one enemy at a time
+- Watch shield values and break them first
 
-**问题**: AVD 启动失败或很慢
+## 📊 Game Mechanics
 
-**解决方案**:
-1. 确保已启用 Intel HAXM 或 Windows Hypervisor Platform
-2. 尝试使用 x86_64 系统镜像
-3. 增加分配给模拟器的 RAM
+### Energy System
+- Each action consumes energy
+- Energy fully restores in Quarters
+- Manage energy carefully during missions
 
-## 技术说明
+### Experience & Leveling
+- XP is retained after missions
+- Higher levels increase stats and skill effectiveness
+- Training Simulator accelerates XP gain
 
-- **架构**: 单 Activity + ViewFlipper 多页面
-- **UI**: XML 布局 + RecyclerView
-- **数据存储**: JSON 文件（内部存储）
-- **图表**: 自定义 View（柱状图、饼图）
-- **战斗**: 回合制，非实时渲染
+### Injury System
+- Injured crew cannot participate in combat
+- Rest in Quarters to recover from injuries
+- Plan missions around crew availability
 
-## 修改记录
+### Squad Bonuses
+- Different profession combinations provide bonuses
+- Check bonus descriptions before starting missions
+- Optimize squad composition for each mission type
 
-最近修复的问题：
-1. ✅ 升级 Gradle 从 5.6.4 到 7.5（兼容现代 Android Studio）
-2. ✅ 升级 Android Gradle Plugin 从 3.6.4 到 7.4.2
-3. ✅ 更新依赖库到兼容版本
-4. ✅ 修复 lambda 表达式兼容性（API 28）
-5. ✅ 添加必要的 import 语句
+## 🛠️ Technical Details
 
-## 课程展示建议
+### Architecture
+- **MVC Pattern**: Clear separation of Model, View, Controller
+- **Manager Classes**: CombatManager, CrewManager, MissionManager, etc.
+- **Custom Views**: CombatView for rendering battles
+- **RecyclerView Adapters**: Efficient list rendering
 
-1. **演示流程**:
-   - 展示主界面的三个区域
-   - 点击船员查看详情
-   - 演示训练和休息功能
-   - 选择任务并组建小队
-   - 进行一场战斗
-   - 查看统计数据
+### Key Components
+- **GameState**: Central game state management
+- **CombatState**: Battle state and logic
+- **ProfessionConfig**: Profession definitions and balancing
+- **StorageManager**: Save/load functionality using Gson
 
-2. **重点展示**:
-   - 完整的游戏循环
-   - 五个不同职业的特点
-   - 存档/读档功能
-   - 统计可视化图表
-   - 小队加成系统
+### Dependencies
+- AndroidX libraries
+- RecyclerView for lists
+- Gson for JSON serialization
+- Custom drawing with Canvas
 
-3. **代码亮点**:
-   - 清晰的分层架构
-   - 单例模式管理游戏状态
-   - 自定义 View 实现图表
-   - JSON 序列化存档
-   - 观察者模式的 UI 更新
+## 📝 License
 
-## 联系方式
+This project is for educational and demonstration purposes.
 
-如有问题，请检查 Android Studio 的 Logcat 输出以获取详细错误信息。
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit issues and pull requests.
+
+## 📞 Support
+
+If you encounter any bugs or have suggestions, please open an issue in the repository.
 
 ---
 
-**祝你在 Android Studio 中顺利运行！** 🚀
+**Enjoy commanding your space colony!** 🚀
